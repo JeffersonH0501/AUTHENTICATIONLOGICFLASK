@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import app
 
 db = SQLAlchemy()
 
@@ -32,4 +33,4 @@ class Adenda(db.Model):
     descripcion = db.Column(db.String(500))
     historia_clinica = db.Column(db.Integer, db.ForeignKey('historia_clinica.id_hc'), nullable=False)
 
-#db.init_app(app)
+db.init_app(app)

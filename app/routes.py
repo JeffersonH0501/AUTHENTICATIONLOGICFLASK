@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, app
 import jwt
 from flask.views import MethodView
 from werkzeug import exceptions as http_exceptions
