@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
-from .routes import AutenticacionAPI, HealthCheckView
 from config import Config
 
 app = Flask(__name__)
@@ -9,6 +8,8 @@ app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
+
+from .routes import AutenticacionAPI, HealthCheckView
 
 # Rutas
 app.add_url_rule('/autenticacion/', view_func=AutenticacionAPI.as_view('autenticacion'))
