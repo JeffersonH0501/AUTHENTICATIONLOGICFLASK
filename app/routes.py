@@ -1,8 +1,7 @@
-from flask import request, jsonify
+from flask import request, jsonify, app
 from flask.views import MethodView
 from werkzeug import exceptions as http_exceptions
 from sqlalchemy.orm.exc import NoResultFound
-from app import app
 from .models import Usuario
 import jwt
 
