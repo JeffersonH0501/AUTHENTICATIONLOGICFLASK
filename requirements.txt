@@ -1,3 +1,5 @@
 Flask
 Flask-SQLAlchemy
 Flask-JWT-Extended
+alembic==1.7.7
+Flask-Migrate
