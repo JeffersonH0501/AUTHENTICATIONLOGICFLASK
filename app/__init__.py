@@ -1,18 +1,29 @@
 from flask import Flask
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
-from flask_jwt_extended import JWTManager
-from flask_migrate import Migrate
-from app.routes import AutenticacionAPI, HealthCheckView
-from config import Config
 
-app = Flask(__name__)
-app.config.from_object(Config)
+db = SQLAlchemy()
+admin = Admin()
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-jwt = JWTManager(app)
+def create_app():
+    app = Flask(__name__)
 
-# Rutas
-app.add_url_rule('/autenticacion/', view_func=AutenticacionAPI.as_view('autenticacion'))
-app.add_url_rule('/health-check/', view_func=HealthCheckView.as_view('health_check'))
+    from config import Config
 
+    app.config.from_object(Config)
+    db.init_app(app)
+    admin.init_app(app)
+
+    from .models import Usuario, HistoriaClinica, Adenda
+
+    admin.add_view(ModelView(Usuario, db.session))
+    admin.add_view(ModelView(HistoriaClinica, db.session))
+    admin.add_view(ModelView(Adenda, db.session))
+
+    from app.routes import AutenticacionAPI, HealthCheckView
+
+    app.add_url_rule('/autenticacion/', view_func=AutenticacionAPI.as_view('autenticacion'))
+    app.add_url_rule('/health-check/', view_func=HealthCheckView.as_view('health_check'))
+
+    return app
