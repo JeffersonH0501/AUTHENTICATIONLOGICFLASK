@@ -27,4 +27,4 @@ class Adenda(db.Model):
     descripcion = db.Column(db.String(500))
     historia_clinica_id = db.Column(db.Integer, db.ForeignKey('historia_clinica.id_hc'), nullable=False)
 
-db.init_app(app)
+#db.init_app(app)
