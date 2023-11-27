@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 class Usuario(db.Model):
     __tablename__ = 'usuarios_usuario'
-    documento = db.Column(db.String(15))
+    documento = db.Column(db.String(15), primary_key=True)
     clave = db.Column(db.String(30), default='123')
     tipo = db.Column(db.String(30), default='default')
     foto = db.Column(db.String(255), default='default')
