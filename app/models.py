@@ -7,6 +7,7 @@ class HistoriaClinica(db.Model):
     diagnosticos = db.Column(db.String(500))
     tratamientos = db.Column(db.String(500))
     notas = db.Column(db.String(500))
+    usuario_documento = db.Column(db.String(15), db.ForeignKey('usuario.documento'), nullable=True)
 
 medico_paciente = db.Table('medico_paciente',
     db.Column('medico_documento', db.String(15), db.ForeignKey('usuario.documento')),
