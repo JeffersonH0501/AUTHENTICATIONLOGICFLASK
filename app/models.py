@@ -13,6 +13,7 @@ class HistoriaClinica(db.Model):
     diagnosticos = db.Column(db.String(500))
     tratamientos = db.Column(db.String(500))
     notas = db.Column(db.String(500))
+    usuario = db.relationship('Usuario', back_populates='historia_clinica')
 
 class Usuario(db.Model):
     documento = db.Column(db.String(15), primary_key=True)
