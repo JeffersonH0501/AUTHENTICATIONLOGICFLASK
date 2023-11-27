@@ -9,9 +9,10 @@ class HistoriaClinica(db.Model):
     notas = db.Column(db.String(500))
     usuario_documento = db.Column(db.String(15), db.ForeignKey('usuario.documento'), nullable=True)
 
-medico_paciente = db.Table('medico_paciente',
-    db.Column('medico_documento', db.String(15), db.ForeignKey('usuario.documento')),
-    db.Column('paciente_documento', db.String(15), db.ForeignKey('usuario.documento'))
+medico_paciente = db.Table(
+    'medico_paciente',
+    db.Column('usuario_documento', db.String(15), db.ForeignKey('usuario.documento')),
+    db.Column('medico_documento', db.String(15), db.ForeignKey('usuario.documento'))
 )
 
 class Usuario(db.Model):
