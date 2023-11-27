@@ -24,7 +24,7 @@ class Usuario(db.Model):
     sexo = db.Column(db.String(30), default='a')
     foto = db.Column(db.String(255), default='a')
     historia_clinica = db.relationship('HistoriaClinica', backref='usuario', uselist=False, cascade='all, delete-orphan')
-    medico = db.relationship('Usuario', secondary=medico_paciente, backref='pacientes', lazy='dynamic')
+    medico = db.relationship('Usuario', secondary='medico_paciente', primaryjoin='Usuario.documento==medico_paciente.c.usuario_documento', secondaryjoin='Usuario.documento==medico_paciente.c.medico_documento', backref=db.backref('pacientes', lazy='dynamic'))
 
 class Adenda(db.Model):
     id_adenda = db.Column(db.Integer, primary_key=True)
