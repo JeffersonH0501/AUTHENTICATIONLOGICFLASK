@@ -15,11 +15,9 @@ def create_app():
     db.init_app(app)
     admin.init_app(app)
 
-    from .models import Usuario, HistoriaClinica, Adenda
+    from .models import Usuario
 
     admin.add_view(ModelView(Usuario, db.session))
-    admin.add_view(ModelView(HistoriaClinica, db.session))
-    admin.add_view(ModelView(Adenda, db.session))
 
     from app.routes import AutenticacionAPI, HealthCheckView
 
