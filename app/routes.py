@@ -1,6 +1,5 @@
 from flask import request, jsonify, current_app
 from flask.views import MethodView
-from werkzeug.exceptions import HTTPStatus
 from sqlalchemy.orm.exc import NoResultFound
 from .models import Usuario
 import jwt
@@ -27,10 +26,10 @@ class AutenticacionAPI(MethodView):
             token = jwt.encode(token_payload, current_app.config['SECRET_KEY'], algorithm="HS256")
 
             respuesta_post = {"token": token}
-            status_code = HTTPStatus.OK
+            status_code = 200
         else:
             respuesta_post = {}
-            status_code = HTTPStatus.OK
+            status_code = 200
 
         return jsonify(respuesta_post), status_code
     
