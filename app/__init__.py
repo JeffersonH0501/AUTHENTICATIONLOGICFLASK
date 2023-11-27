@@ -9,7 +9,7 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
 
-from .routes import AutenticacionAPI, HealthCheckView
+from app.routes import AutenticacionAPI, HealthCheckView
 
 # Rutas
 app.add_url_rule('/autenticacion/', view_func=AutenticacionAPI.as_view('autenticacion'))
