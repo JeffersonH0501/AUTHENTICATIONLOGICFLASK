@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class HistoriaClinica(db.Model):
+    __tablename__ = 'usuarios_historiaclinica'
     id = db.Column(db.Integer, primary_key=True)
     diagnosticos = db.Column(db.String(500))
     tratamientos = db.Column(db.String(500))
@@ -10,6 +11,7 @@ class HistoriaClinica(db.Model):
     adendas = db.relationship('Adenda', backref='historia_clinica', lazy=True)
 
 class Adenda(db.Model):
+    __tablename__ = 'usuarios_adenda'
     id = db.Column(db.Integer, primary_key=True)
     fecha = db.Column(db.String(40))
     tipo = db.Column(db.String(50))
@@ -17,6 +19,7 @@ class Adenda(db.Model):
     historia_clinica_id = db.Column(db.Integer, db.ForeignKey('historia_clinica.id'), nullable=False)
 
 class Usuario(db.Model):
+    __tablename__ = 'usuarios_usuario'
     documento = db.Column(db.String(15), primary_key=True)
     clave = db.Column(db.String(30), default='123')
     tipo = db.Column(db.String(30), default='default')
