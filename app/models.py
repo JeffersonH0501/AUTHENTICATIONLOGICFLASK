@@ -15,6 +15,12 @@ class HistoriaClinica(db.Model):
     notas = db.Column(db.String(500))
     usuario = db.relationship('Usuario', back_populates='historia_clinica')
 
+medico_paciente = db.Table(
+    'medico_paciente',
+    db.Column('usuario_documento', db.String(15), db.ForeignKey('usuario.documento')),
+    db.Column('medico_documento', db.String(15), db.ForeignKey('usuario.documento'))
+)
+
 class Usuario(db.Model):
     documento = db.Column(db.String(15), primary_key=True)
     clave = db.Column(db.String(30), default='a')
