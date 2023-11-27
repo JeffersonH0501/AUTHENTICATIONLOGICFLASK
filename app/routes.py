@@ -1,4 +1,4 @@
-from flask import request, jsonify, app
+from flask import request, jsonify, current_app
 from flask.views import MethodView
 from werkzeug import exceptions as http_exceptions
 from sqlalchemy.orm.exc import NoResultFound
@@ -24,7 +24,7 @@ class AutenticacionAPI(MethodView):
 
         if usuario is not None:
             token_payload = {"documento": usuario.documento, "tipo": usuario.tipo}
-            token = jwt.encode(token_payload, app.config['SECRET_KEY'], algorithm="HS256")
+            token = jwt.encode(token_payload, current_app.config['SECRET_KEY'], algorithm="HS256")
 
             respuesta_post = {"token": token}
             status_code = http_exceptions.HTTPStatus.OK
