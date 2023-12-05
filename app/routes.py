@@ -18,7 +18,7 @@ def verificar_usuario(documento, clave):
         print(str(documento_cifrado))
 
         hash_clave = hash_dato(clave)
-        usuario = Usuario.query.filter_by(documento="b'gAAAAABlbou4j8KwOV2MmXdftBfsYPlfdTiWYRH1ae4nPIx2A7CdaiyubG337r7Ww0Jx1hoxjcpYdnnGZzdYxHVAHS8vXt_zmQ==", clave=hash_clave).one()
+        usuario = Usuario.query.filter_by(documento="b'gAAAAABlbo2owv16qKjALfX4cUeNM9jH1cVMf_t2cN0QRB9RDG5IHJD4MUW-D-4aaiMY_mmkt_Srfig9VLwxnkguTt1ccOJ_ww=='", clave=hash_clave).one()
     except NoResultFound:
         usuario = None
     
