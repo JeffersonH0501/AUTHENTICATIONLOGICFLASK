@@ -4,7 +4,12 @@ from sqlalchemy.orm.exc import NoResultFound
 from .models import Usuario
 import jwt
 import hashlib
-import base64
+from cryptography.fernet import Fernet
+
+cipher_suite = Fernet(current_app.config['SIMETRIC_KEY'].encode())
+
+def cifrar_dato(dato):
+    return cipher_suite.encrypt(dato.encode())
 
 def hash_dato(dato):
     hash_object = hashlib.sha256(dato.encode())
@@ -12,9 +17,9 @@ def hash_dato(dato):
 
 def verificar_usuario(documento, clave):
     try:
-        hash_documento = hash_dato(documento)
+        documento_cifrado = cifrar_dato(documento)
         hash_clave = hash_dato(clave)
-        usuario = Usuario.query.filter_by(documento=hash_documento, clave=hash_clave).one()
+        usuario = Usuario.query.filter_by(documento=documento_cifrado, clave=hash_clave).one()
     except NoResultFound:
         usuario = None
 
