@@ -30,9 +30,11 @@ class AutenticacionAPI(MethodView):
         usuario = verificar_usuario(documento, clave)
 
         if usuario is not None: 
-            tipo_base64 = base64.b64encode(usuario.tipo.encode()).decode()
+            
+            print(type( usuario.documento))
+            print(type( usuario.tipo))
 
-            token_payload = {"documento": usuario.documento, "tipo": tipo_base64}
+            token_payload = {"documento": usuario.documento, "tipo": usuario.tipo}
             token = jwt.encode(token_payload, current_app.config['SECRET_KEY'], algorithm="HS256")
 
             respuesta_post = {"token": token}
