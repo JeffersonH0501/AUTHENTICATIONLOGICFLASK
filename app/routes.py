@@ -14,6 +14,9 @@ def verificar_usuario(documento, clave):
     try:
         cipher_suite = Fernet(current_app.config['SIMETRIC_KEY'].encode())
         documento_cifrado = cipher_suite.encrypt(documento.encode())
+
+        print(str(documento_cifrado))
+        
         hash_clave = hash_dato(clave)
         usuario = Usuario.query.filter_by(documento=str(documento_cifrado), clave=hash_clave).one()
     except NoResultFound:
