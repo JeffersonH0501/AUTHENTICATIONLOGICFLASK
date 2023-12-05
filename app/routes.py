@@ -4,6 +4,7 @@ from sqlalchemy.orm.exc import NoResultFound
 from .models import Usuario
 import jwt
 import hashlib
+import base64
 
 def hash_dato(dato):
     hash_object = hashlib.sha256(dato.encode())
@@ -28,8 +29,10 @@ class AutenticacionAPI(MethodView):
 
         usuario = verificar_usuario(documento, clave)
 
-        if usuario is not None:
-            token_payload = {"documento": usuario.documento, "tipo": usuario.tipo}
+        if usuario is not None: 
+            tipo_base64 = base64.b64encode(usuario.tipo).decode()
+
+            token_payload = {"documento": usuario.documento, "tipo": tipo_base64}
             token = jwt.encode(token_payload, current_app.config['SECRET_KEY'], algorithm="HS256")
 
             respuesta_post = {"token": token}
