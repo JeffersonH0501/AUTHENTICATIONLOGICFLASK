@@ -6,18 +6,14 @@ import jwt
 import hashlib
 from cryptography.fernet import Fernet
 
-cipher_suite = Fernet(current_app.config['SIMETRIC_KEY'].encode())
-
-def cifrar_dato(dato):
-    return cipher_suite.encrypt(dato.encode())
-
 def hash_dato(dato):
     hash_object = hashlib.sha256(dato.encode())
     return hash_object.hexdigest()
 
 def verificar_usuario(documento, clave):
     try:
-        documento_cifrado = cifrar_dato(documento)
+        cipher_suite = Fernet(current_app.config['SIMETRIC_KEY'].encode())
+        documento_cifrado = cipher_suite.encrypt(documento.encode())
         hash_clave = hash_dato(clave)
         usuario = Usuario.query.filter_by(documento=documento_cifrado, clave=hash_clave).one()
     except NoResultFound:
