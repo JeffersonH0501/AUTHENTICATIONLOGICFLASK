@@ -16,9 +16,9 @@ def verificar_usuario(documento, clave):
         documento_cifrado = cipher_suite.encrypt(documento.encode())
 
         print(str(documento_cifrado))
-        
+
         hash_clave = hash_dato(clave)
-        usuario = Usuario.query.filter_by(documento=str(documento_cifrado), clave=hash_clave).one()
+        usuario = Usuario.query.filter_by(documento="b'gAAAAABlbou4j8KwOV2MmXdftBfsYPlfdTiWYRH1ae4nPIx2A7CdaiyubG337r7Ww0Jx1hoxjcpYdnnGZzdYxHVAHS8vXt_zmQ", clave=hash_clave).one()
     except NoResultFound:
         usuario = None
     
