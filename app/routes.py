@@ -18,7 +18,8 @@ def verificar_usuario(documento, clave):
         usuario = Usuario.query.filter_by(documento=str(documento_cifrado), clave=hash_clave).one()
     except NoResultFound:
         usuario = None
-
+    
+    print(usuario)
     return usuario
 
 class AutenticacionAPI(MethodView):
